@@ -19,29 +19,37 @@
     NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
     
     //根据传入的关键字找到对应节点
-    NSArray *arrayData = [dictionary objectForKey:key];
+    NSArray *array = [dictionary objectForKey:key];
     
-    if (arrayData != nil && ![arrayData isEqual:@""])
-    {
-        for (NSDictionary *dic in arrayData)
+    for (NSArray *arrayData in array) {
+        
+        if (arrayData != nil && ![arrayData isEqual:@""])
         {
-            //读取 plist 文件中的固定数据
-            Item *item = [[Item alloc] init];
-            
-            item.id         = [dic objectForKey:@"ID"];
-            item.retryTimes = [dic objectForKey:@"RetryTimes"];
-            item.testName   = [dic objectForKey:@"TestName"];
-            item.units      = [dic objectForKey:@"Units"];
-            item.min        = [dic objectForKey:@"Min"];
-            item.max        = [dic objectForKey:@"Max"];
-            item.value      = [dic objectForKey:@"Value"];
-            item.result     = [dic objectForKey:@"Result"];
-            item.isTest     = [[dic objectForKey:@"IsTest"] boolValue];
-            item.testAllCommand =[dic objectForKey:@"AllNeedCommands"];
-            
-            [testItems addObject:item];
+            for (NSDictionary *dic in arrayData)
+            {
+                //读取 plist 文件中的固定数据
+                Item *item = [[Item alloc] init];
+                
+                item.id         = [dic objectForKey:@"ID"];
+                item.retryTimes = [dic objectForKey:@"RetryTimes"];
+                item.testName   = [dic objectForKey:@"TestName"];
+                item.units      = [dic objectForKey:@"Units"];
+                item.min        = [dic objectForKey:@"Min"];
+                item.max        = [dic objectForKey:@"Max"];
+                item.value      = [dic objectForKey:@"Value"];
+                item.result     = [dic objectForKey:@"Result"];
+                item.isTest     = [[dic objectForKey:@"IsTest"] boolValue];
+                item.isShow     = [[dic objectForKey:@"IsShow"] boolValue];
+                item.testAllCommand =[dic objectForKey:@"AllNeedCommands"];
+                
+                [testItems addObject:item];
+            }
         }
     }
+    
+ //   int temp = testItems.count;
+    
+    
     return testItems;
 }
 

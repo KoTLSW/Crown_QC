@@ -46,6 +46,8 @@
     NSInteger _out_rate;
     NSInteger _in_rate;
     
+    
+    
     NSString* _micl_calibration_time;
     CGFloat   _micl_calibration_db;
     CGFloat   _micl_calibration_v_pa;
@@ -74,6 +76,18 @@
     NSString * _waveFrequence;
     NSString * _waveVolt;
     
+    NSString  * _firstSN;
+    NSString  * _secondSN;
+    NSArray   * _differentSNArray;
+    
+    //2017.6.24
+    NSString  * _zin_Offset;
+    NSString  * _Er_Zin_RES;
+    //number
+    //sleepTime
+    
+    NSString * _number;
+    NSString * _sleepTime;
 }
 @end
 //=============================================
@@ -105,11 +119,6 @@
 @synthesize waveVolt               = _waveVolt;
 @synthesize waveOffset             = _waveOffset;
 @synthesize waveFrequence          = _waveFrequence;
-
-
-
-
-
 @synthesize thdn                   = _thdn;
 @synthesize spkvol                 = _spkvol;
 @synthesize spkscale               = _spkscale;
@@ -130,6 +139,11 @@
 @synthesize spk_calibration_db2    = _spk_calibration_db2;
 @synthesize spk_calibration_db2_v  = _spk_calibration_db2_v;
 @synthesize pdca_is_upload         = _pdca_is_upload;
+@synthesize differentSNArray       = _differentSNArray;
+@synthesize zin_Offset             = _zin_Offset;
+@synthesize Er_Zin_RES             = _Er_Zin_RES;
+@synthesize number                 = _number;
+@synthesize sleepTime              = _sleepTime;
 //=============================================
 - (void)ParamRead:(NSString*)filename
 {
@@ -170,9 +184,14 @@
     self.waveOffset            =[dictionary objectForKey:@"waveOffset"];
     self.waveVolt              =[dictionary objectForKey:@"waveVolt"];
     
+
+     //zin电压的偏移量
+    self.zin_Offset            =[dictionary objectForKey:@"zin_Offset"];
+    self.Er_Zin_RES            =[dictionary objectForKey:@"Er_Zin_RES"];
     
     
-    
+    //特别规则的SN
+    self.differentSNArray      =[dictionary objectForKey:@"differentSNArray"];
     //s_build
     self.s_build               =[dictionary objectForKey:@"s_build"];
     
@@ -212,6 +231,10 @@
     
     self.pdca_is_upload         = [[dictionary objectForKey:@"pdca_is_upload"]boolValue];
     
+    self.number                 = [dictionary objectForKey:@"number"];
+    self.sleepTime              = [dictionary objectForKey:@"sleepTime"];
+    
+    
 }
 //=============================================
 - (void)ParamWrite:(NSString*)filename
@@ -242,6 +265,8 @@
     [dictionary setObject:_waveVolt forKey:@"waveVolt"];
     [dictionary setObject:@"s_build" forKey:@"s_build"];
     
+    
+    //特别规则的SN
     
     
     

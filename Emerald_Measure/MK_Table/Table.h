@@ -19,7 +19,9 @@
 @property (weak) IBOutlet NSScrollView *scrollview;
 @property (weak) IBOutlet NSTableView *table;
 //=============================================
-- (id)init:(NSView*)parent DisplayData:(NSArray*)arrayData;
+//- (id)init:(NSView*)parent DisplayData:(NSArray*)arrayData;
+
+- (id)init:(NSView*)parent DisplayData:(NSArray*)arrayData JudgeSN:(NSArray *)judgeSN Set:(NSString *)set number_test:(int)number_test;
 
 -(void)SelectRow:(int)rowindex;
 

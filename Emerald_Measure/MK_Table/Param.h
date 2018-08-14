@@ -33,6 +33,9 @@
 //温湿度传感器相关
 @property(readwrite,copy)NSString*  humiture_uart_port_name;
 @property(readwrite)NSInteger       humiture_uart_baud;
+//跟读数有关
+@property(nonatomic,strong)NSString * number;
+@property(nonatomic,strong)NSString * sleepTime;
 
 
 //文件路径
@@ -50,8 +53,13 @@
 
 //sbuid
 @property(nonatomic,strong)NSString * s_build;
+//特别的SN
+@property(nonatomic,strong)NSArray  * differentSNArray;
 
 
+//2017.6.20
+@property(nonatomic,strong)NSString * zin_Offset;
+@property(nonatomic,strong)NSString * Er_Zin_RES;
 
 
 
@@ -88,6 +96,7 @@
 @property(readwrite)CGFloat         spk_calibration_db2_v;
 
 @property(readwrite)BOOL            pdca_is_upload;
+
 //=============================================
 - (void)ParamRead:(NSString*)filename;
 - (void)ParamWrite:(NSString*)filename;
