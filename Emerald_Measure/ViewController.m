@@ -45,7 +45,7 @@ static ViewController * selfClass=nil;
 //@"CROWN_Five"  测试项有5项plist
 //@"Agilent34461A_MODE_RES_4W"
 #define testPlist  @"CROWN_One" //选择不同的plist文件
-#define indexItemOfDut  1   //测试项有5项
+#define indexItemOfDut  1      //只有一个测试项
 #define lingCE   @"Agilent34461A_MODE_RES_2W"
 //***************************
 //不同项的表头
@@ -338,13 +338,11 @@ static ViewController * selfClass=nil;
     fixtureSerial=[ORSSerialPort serialPortWithPath:param.fixture_uart_port_name];
     fixtureSerial.baudRate=@B115200;
     fixtureSerial.delegate=self;
-   
     
+    [self redirectSTD:STDOUT_FILENO];  //冲定向log
+    [self redirectSTD:STDERR_FILENO];
 
     
-      [self redirectSTD:STDOUT_FILENO];  //冲定向log
-      [self redirectSTD:STDERR_FILENO];
-//
     if (param.isDebug)
     {
         bigTitleTF.stringValue = @"Debug Mode";
@@ -1030,8 +1028,10 @@ static ViewController * selfClass=nil;
             [txtContentMutableStr appendString:[NSString stringWithFormat:@"\n\nStartTimer:%@\nTestName:%@\nUnit:%@\nLowerLimit:%@\nUpperLimit:%@\n",[[GetTimeDay shareInstance] getCurrentTime],testItem.testName,testItem.units,testItem.min,testItem.max]];
             
             //加载测试项
-            BOOL boolResult = [self TestItem:testItem];
-            
+            BOOL boolResult;
+          
+            boolResult = [self TestItem:testItem];
+
             
             //测试结果转为字符串格式
             if (boolResult == YES)
@@ -1369,16 +1369,20 @@ static ViewController * selfClass=nil;
                 
                 
                 
-                //将所有文件夹进行压缩
-                //NSMutableArray  * Zip_Path_Array = [self pressDirectoryToZIP:dataArr];
+//                //将所有文件夹进行压缩
+//                NSMutableArray  * Zip_Path_Array = [self pressDirectoryToZIP:dataArr];
             
                 //将数据从数组中等分成[snArray count]数组
-//                NSArray   *  item_Arr = [self GetArrayWithArray];
-//                
-//                for (int i=0;i<[item_Arr count];i++) {
-//                    
-//                    [self uploadPDCA_FeicuiWithItemArr:item_Arr[i] withZipString:Zip_Path_Array[i] withItemResultString:snResultArry[i] withSNString:sonSnArr[i] withDataArr:dataArr[i]];
-//                }
+                
+                NSArray   *  item_Arr = [self GetArrayWithArray];
+                
+                NSLog(@"打印当前的值%lu", (unsigned long)[item_Arr count]);
+                for (int i=0;i<[item_Arr count];i++) {
+                    
+                    NSLog(@"打印当前的数组值:%@",[item_Arr objectAtIndex:i]);
+                    
+                    [self uploadPDCA_FeicuiWithItemArr:[item_Arr objectAtIndex:i] withZipString:@"" withItemResultString:snResultArry[i] withSNString:[SNArr objectAtIndex:i] withDataArr:@[]];
+                }
                 
                 
                 
@@ -1464,7 +1468,7 @@ static ViewController * selfClass=nil;
             
             while (YES) {
                 
-                
+                [NSThread sleepForTimeInterval:0.1];
                 [self Fixture:fixtureSerial writeCommand:@"ycylinder off"];
                 //[NSThread sleepForTimeInterval:0.5];
                 [self whileLoopTest];
@@ -1474,10 +1478,10 @@ static ViewController * selfClass=nil;
                 if ([backStr containsString:@"pass"]|| param.isDebug) {
                     backStr = @"";
                     
+                    [NSThread sleepForTimeInterval:0.1];
                     [self Fixture:fixtureSerial writeCommand:@"xcylinder off"];
                     
                     [self whileLoopTest];
-                    //[NSThread sleepForTimeInterval:0.5];
                     
                     [logGlobalArray addObject:[NSString stringWithFormat: @"%@: %@ receive:>>xcylinder off X\n", [[GetTimeDay shareInstance] getLogTime],fixtureSerial]];
                     
@@ -1525,7 +1529,7 @@ static ViewController * selfClass=nil;
                  //sleep(2);
                 index = 3;
                 [mk_table ClearTable];
-                [self UpdateTextView:@"\n\n" andClear:YES andTextView:FailItemView];
+                //[self UpdateTextView:@"\n\n" andClear:YES andTextView:FailItemView];
                 havaSN_num = 0;
                 snIndex = 0;
                 [loadArr removeAllObjects];
@@ -2459,8 +2463,8 @@ void handleReply( IP_API_Reply reply )
     
     
     
-    IP_addBlob(UID, [[[NSString stringWithFormat:@"%@_%@",param.sw_name,param.sw_ver] stringByAppendingString:@"_ZIP_Log"] cStringUsingEncoding:1], [ZIP_String cStringUsingEncoding:1]);
-    NSLog(@"上传zip地址***%@***",ZIP_String);
+//    IP_addBlob(UID, [[[NSString stringWithFormat:@"%@_%@",param.sw_name,param.sw_ver] stringByAppendingString:@"_ZIP_Log"] cStringUsingEncoding:1], [ZIP_String cStringUsingEncoding:1]);
+//    NSLog(@"上传zip地址***%@***",ZIP_String);
     
     
     
@@ -2471,7 +2475,7 @@ void handleReply( IP_API_Reply reply )
     
     //==========================================================================================
     //----------------------- change the loop 2017.5.25 _MK ------------------------------------
-    for(int i=0;i<[ItemArray count];i++)
+    for(int i=0;i<[ItemArray count]-1;i++)
     {
         testItem = [ItemArray objectAtIndex:i];
         //---------------------------------------
@@ -2480,6 +2484,8 @@ void handleReply( IP_API_Reply reply )
         NSString *testitemMaxStr = testItem.max;
         NSString *testitemUnitStr = testItem.units;
         NSString *testitemValueStr = testItem.value;
+        
+        NSLog(@"testitemNameStr:%@====testitemMinStr:%@=====testitemMaxStr:%@=====testitemUnitStr:%@======testitemValueStr:%@",testitemNameStr,testitemMinStr,testitemMaxStr,testitemUnitStr,testitemValueStr);
         
         if ([testitemUnitStr isEqualToString:@"GΩ"])
         {

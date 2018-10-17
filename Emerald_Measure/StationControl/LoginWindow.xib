@@ -7,9 +7,6 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="LoginWindow">
             <connections>
-                <outlet property="CF_Button" destination="44d-TS-gJ3" id="B29-d0-1Gb"/>
-                <outlet property="ER_Button" destination="RC7-Ln-xsB" id="KGc-YU-VAu"/>
-                <outlet property="SB_Button" destination="D5X-xY-rcx" id="slu-Vv-1hw"/>
                 <outlet property="messageLab" destination="Wmf-9T-eLL" id="0t9-jD-9XM"/>
                 <outlet property="passWord" destination="nON-Xz-gi3" id="O2F-Xv-zq6"/>
                 <outlet property="userName" destination="WRc-Zc-34Z" id="azf-kZ-pxm"/>
@@ -21,10 +18,10 @@
         <window title="LoginWindow" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" animationBehavior="default" id="F0z-JX-Cv5">
             <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="196" y="240" width="451" height="384"/>
+            <rect key="contentRect" x="196" y="240" width="451" height="244"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
             <view key="contentView" id="se5-gp-TjO">
-                <rect key="frame" x="0.0" y="0.0" width="451" height="384"/>
+                <rect key="frame" x="0.0" y="0.0" width="451" height="244"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wmf-9T-eLL">
@@ -48,48 +45,6 @@ DQ
                             <action selector="clickToLogin:" target="-2" id="VTd-Mq-kyG"/>
                         </connections>
                     </button>
-                    <box fixedFrame="YES" title="ChooseStation" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="MVF-rT-ktT">
-                        <rect key="frame" x="34" y="240" width="359" height="119"/>
-                        <view key="contentView" id="fjW-fV-Eke">
-                            <rect key="frame" x="1" y="1" width="357" height="99"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            <subviews>
-                                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="44d-TS-gJ3">
-                                    <rect key="frame" x="190" y="58" width="149" height="30"/>
-                                    <buttonCell key="cell" type="radio" title="Emerald_CF_Station" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="SGa-UE-p8s">
-                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                        <font key="font" metaFont="system"/>
-                                    </buttonCell>
-                                    <connections>
-                                        <action selector="CF_Station_Action:" target="-2" id="u6L-kj-HHy"/>
-                                    </connections>
-                                </button>
-                                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RC7-Ln-xsB">
-                                    <rect key="frame" x="19" y="19" width="155" height="25"/>
-                                    <buttonCell key="cell" type="radio" title="Emerald_ER_Station" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="mZ2-6D-vUs">
-                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                        <font key="font" metaFont="system"/>
-                                    </buttonCell>
-                                    <connections>
-                                        <action selector="ER_Station_Action:" target="-2" id="hzy-h1-Dya"/>
-                                    </connections>
-                                </button>
-                                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D5X-xY-rcx">
-                                    <rect key="frame" x="22" y="62" width="149" height="23"/>
-                                    <buttonCell key="cell" type="radio" title="Emerald_SB_Station" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="Sob-Jw-Zu0">
-                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                        <font key="font" metaFont="system"/>
-                                    </buttonCell>
-                                    <connections>
-                                        <action selector="SB_Station_Action:" target="-2" id="ZHk-7D-fn4"/>
-                                    </connections>
-                                </button>
-                            </subviews>
-                        </view>
-                        <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                        <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        <font key="titleFont" metaFont="system" size="14"/>
-                    </box>
                     <box fixedFrame="YES" title="LoginInformation" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="I2E-mU-BlJ">
                         <rect key="frame" x="38" y="103" width="360" height="114"/>
                         <view key="contentView" id="tyR-mR-Jmv">
@@ -106,7 +61,7 @@ DQ
                                 </textField>
                                 <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WRc-Zc-34Z">
                                     <rect key="frame" x="96" y="53" width="251" height="30"/>
-                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" placeholderString="输入账号" id="Ds9-Va-BbA">
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" title="admin" placeholderString="输入账号" id="Ds9-Va-BbA">
                                         <font key="font" metaFont="system" size="14"/>
                                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="quaternaryLabelColor" catalog="System" colorSpace="catalog"/>
@@ -122,7 +77,7 @@ DQ
                                 </textField>
                                 <secureTextField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nON-Xz-gi3">
                                     <rect key="frame" x="96" y="13" width="251" height="30"/>
-                                    <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="输入密码" usesSingleLineMode="YES" id="rhg-IS-Fcn">
+                                    <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" title="admin123" placeholderString="输入密码" usesSingleLineMode="YES" id="rhg-IS-Fcn">
                                         <font key="font" metaFont="system" size="14"/>
                                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="quaternaryLabelColor" catalog="System" colorSpace="catalog"/>
@@ -155,7 +110,7 @@ Gw
             <connections>
                 <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
             </connections>
-            <point key="canvasLocation" x="56.5" y="100"/>
+            <point key="canvasLocation" x="56.5" y="170"/>
         </window>
     </objects>
 </document>
